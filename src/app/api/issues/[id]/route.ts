@@ -1,21 +1,16 @@
-import type { NextRequest } from "next/server";
-import { IssueByIdHandler } from "@/server/issues/IssueByIdHandler";
+import type { NextRequest } from 'next/server';
+import { IssueByIdHandler } from '@/server/issues/IssueByIdHandler';
 
-type RouteContext = {
-  params: Promise<{ id: string }>;
-};
+type Params = { params: { id: string } };
 
-export async function GET(req: NextRequest, { params }: RouteContext) {
-  const { id } = await params;
-  return new IssueByIdHandler().get(req, id);
+export async function GET(req: NextRequest, { params }: Params) {
+  return new IssueByIdHandler().get(req, params.id);
 }
 
-export async function PUT(req: NextRequest, { params }: RouteContext) {
-  const { id } = await params;
-  return new IssueByIdHandler().put(req, id);
+export async function PUT(req: NextRequest, { params }: Params) {
+  return new IssueByIdHandler().put(req, params.id);
 }
 
-export async function DELETE(req: NextRequest, { params }: RouteContext) {
-  const { id } = await params;
-  return new IssueByIdHandler().delete(req, id);
+export async function DELETE(req: NextRequest, { params }: Params) {
+  return new IssueByIdHandler().delete(req, params.id);
 }

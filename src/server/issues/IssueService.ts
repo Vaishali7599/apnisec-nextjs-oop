@@ -29,7 +29,16 @@ export class IssueService implements IIssueService {
     return { ...issue, createdAt: issue.createdAt.toISOString(), updatedAt: issue.updatedAt.toISOString() };
   }
 
-  public async create(userId: string, data: { type: string; title: string; description: string; priority?: string; status?: string }) {
+  public async create(
+  userId: string,
+  data: {
+    type: string;
+    title: string;
+    description: string;
+    priority?: string | null;
+    status?: string | null;
+  }
+): Promise<any> {
     const issue = await this.issues.createForUser(userId, {
       type: data.type,
       title: data.title,
